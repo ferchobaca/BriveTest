@@ -21,7 +21,7 @@ namespace BriveTest.Controllers
         // GET: ProdDetas
         public async Task<IActionResult> Index(string searchString)
         {
-            var result = from x in  _context.ProdDeta select x;
+            var result = from x in  _context.ProdDeta.Include(p => p.IdSucursalNavigation) select x;
             //var briveContext = _context.ProdDeta.Include(p => p.CodBarrNavigation).Include(p => p.IdSucursalNavigation);
             ViewData["CurrentFilter"] = searchString;
 
