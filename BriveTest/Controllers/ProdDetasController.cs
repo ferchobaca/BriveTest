@@ -22,7 +22,6 @@ namespace BriveTest.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             var result = from x in  _context.ProdDeta.Include(p => p.IdSucursalNavigation) select x;
-            //var briveContext = _context.ProdDeta.Include(p => p.CodBarrNavigation).Include(p => p.IdSucursalNavigation);
             ViewData["CurrentFilter"] = searchString;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -32,7 +31,6 @@ namespace BriveTest.Controllers
             }
 
             return View(await result.ToListAsync());
-            //return View(await briveContext.ToListAsync());
         }
 
         // GET: ProdDetas/Details/5
