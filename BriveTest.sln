@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BriveTest", "BriveTest\BriveTest.csproj", "{38F82C93-1227-4622-9D38-3FC8DF20EC0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38F82C93-1227-4622-9D38-3FC8DF20EC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F82C93-1227-4622-9D38-3FC8DF20EC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F82C93-1227-4622-9D38-3FC8DF20EC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F82C93-1227-4622-9D38-3FC8DF20EC0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45E6EEA1-21B0-4AE1-BA3D-B6C06822AB0E}
+	EndGlobalSection
+EndGlobal
