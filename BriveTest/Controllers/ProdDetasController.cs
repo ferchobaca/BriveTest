@@ -79,7 +79,7 @@ namespace BriveTest.Controllers
             return View(prodDeta);
         }
 
-        // GET: ProdDetas/Edit/5
+        // GET: ProdDetas/Comprar/5
         public async Task<IActionResult> Comprar(int? id)
         {
             if (id == null)
@@ -96,13 +96,68 @@ namespace BriveTest.Controllers
             ViewData["IdSucursal"] = new SelectList(_context.Sucursal, "IdSucursal", "Nombre", prodDeta.IdSucursal);
             return View(prodDeta);
         }
+        // GET: ProdDetas/Vender/5
+        public async Task<IActionResult> Vender(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        // POST: ProdDetas/Edit/5
+            var prodDeta = await _context.ProdDeta.FindAsync(id);
+            if (prodDeta == null)
+            {
+                return NotFound();
+            }
+            ViewData["CodBarr"] = new SelectList(_context.Producto, "CodBarr", "CodBarr", prodDeta.CodBarr);
+            ViewData["IdSucursal"] = new SelectList(_context.Sucursal, "IdSucursal", "Nombre", prodDeta.IdSucursal);
+            return View(prodDeta);
+        }
+
+        // POST: ProdDetas/Comprar/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Comprar(int id,[Bind("IdDetalle,CodBarr,Nombre,IdSucursal")] ProdDeta prodDeta)
+        {
+            if (id != prodDeta.IdDetalle)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var compra = prodDeta.Cantidad;
+
+                    _context.Update(prodDeta);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProdDetaExists(prodDeta.IdDetalle))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CodBarr"] = new SelectList(_context.Producto, "CodBarr", "Nombre", prodDeta.CodBarr);
+            ViewData["IdSucursal"] = new SelectList(_context.Sucursal, "IdSucursal", "Nombre", prodDeta.IdSucursal);
+            return View(prodDeta);
+        }
+        // POST: ProdDetas/Vender/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Vender(int id, [Bind("IdDetalle,CodBarr,Nombre,IdSucursal")] ProdDeta prodDeta)
         {
             if (id != prodDeta.IdDetalle)
             {
