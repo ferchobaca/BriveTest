@@ -80,7 +80,7 @@ namespace BriveTest.Controllers
         }
 
         // GET: ProdDetas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Comprar(int? id)
         {
             if (id == null)
             {
@@ -92,7 +92,7 @@ namespace BriveTest.Controllers
             {
                 return NotFound();
             }
-            ViewData["CodBarr"] = new SelectList(_context.Producto, "CodBarr", "Nombre", prodDeta.CodBarr);
+            ViewData["CodBarr"] = new SelectList(_context.Producto, "CodBarr", "CodBarr", prodDeta.CodBarr);
             ViewData["IdSucursal"] = new SelectList(_context.Sucursal, "IdSucursal", "Nombre", prodDeta.IdSucursal);
             return View(prodDeta);
         }
@@ -102,7 +102,7 @@ namespace BriveTest.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDetalle,CodBarr,Nombre,Cantidad,PrecUnit,IdSucursal")] ProdDeta prodDeta)
+        public async Task<IActionResult> Comprar(int id,[Bind("IdDetalle,CodBarr,Nombre,IdSucursal")] ProdDeta prodDeta)
         {
             if (id != prodDeta.IdDetalle)
             {
@@ -113,6 +113,8 @@ namespace BriveTest.Controllers
             {
                 try
                 {
+                    var compra = prodDeta.Cantidad;
+
                     _context.Update(prodDeta);
                     await _context.SaveChangesAsync();
                 }
