@@ -119,7 +119,7 @@ namespace BriveTest.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Comprar(int id,[Bind("IdDetalle,CodBarr,Nombre,IdSucursal")] ProdDeta prodDeta)
+        public async Task<IActionResult> Comprar(int id, [Bind("IdDetalle,CodBarr,Nombre,Cantidad,IdSucursal")] ProdDeta prodDeta)
         {
             if (id != prodDeta.IdDetalle)
             {
@@ -130,7 +130,8 @@ namespace BriveTest.Controllers
             {
                 try
                 {
-                    var compra = prodDeta.Cantidad;
+                    //var prueba = await _context.ProdDeta.FindAsync(id);
+                    //var prueba2 = prueba.Cantidad + prodDeta.Cantidad;
 
                     _context.Update(prodDeta);
                     await _context.SaveChangesAsync();
@@ -168,7 +169,7 @@ namespace BriveTest.Controllers
             {
                 try
                 {
-                    var compra = prodDeta.Cantidad;
+                    
 
                     _context.Update(prodDeta);
                     await _context.SaveChangesAsync();
